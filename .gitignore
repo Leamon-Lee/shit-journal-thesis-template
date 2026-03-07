@@ -11,3 +11,21 @@
 *.snm
 *.vrb
 
+.cursor/
+
+# Additional LaTeX intermediate files
+*.bcf
+*.run.xml
+*.lox
+*.lof
+*.lot
+*.lol
+*.idx
+*.ilg
+*.ind
+*.glg
+*.glo
+*.gls
+*.ist
+*.synctex
+*.synctex(busy)
