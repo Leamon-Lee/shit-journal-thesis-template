@@ -1,0 +1,459 @@
+\documentclass[a4paper,10pt]{shittemplate}
+%==================== 标题与作者信息 ====================
+% 中文题目 (必填)
+\titlecn{S.H.I.T 期刊排版最优解：基于夜间灵光乍现模型的 \LaTeX 格式对齐策略 v1.0}
+% 英文题目 (可选，但推荐填写以方便投稿)
+\titleen{The Optimal Typesetting Solution for the S.H.I.T Journal: \LaTeX\ Format Alignment Strategy Based on the Nocturnal Epiphany Model v1.0}
+% 作者列表：用 \and 分隔多名作者，会横向排版在同一行
+\authorlist{%
+	柠檬猫$^{\dagger, \ast, 1}$ \and 薛定谔的柠檬鱼$^{1}$ \and G.~美奈$^{2}$ \and Miku~殿下$^{\infty, 3}$%
+}
+
+% 作者单位：不再局限于地理位置，而是精神归宿
+\affiliation{%
+	加里顿大学 熬夜与防脱发国家重点实验室 \\
+}
+
+% 作者脚注：包含了科研经费的残酷真相与赛博求神拜佛
+\authorfootnote{%
+	$^{\dagger}$ 柠檬猫在撰写本文时，正处于“感觉自己是个天才”与“想创死所有人”的量子叠加态\\
+	$^{1}$ 隶属于 Cariton University (加里顿大学) S.H.I.T (深夜灵光乍现与脱发技术) 研究中心\\
+	$^{2}$ University of OpenAI, 赛博萨满与提示词玄学系\\
+	$^{\infty}$ Miku 殿下并未参与实际撰写，但为本实验室提供了 100\% 的情绪价值与大葱供应\\
+	$^{\ast}$唯一能且仅能在凌晨三点被跨次元召唤的通讯作者（柠檬猫）：\texttt{leamonlee04@gmail.com}\\
+	\textbf{资助声明：} 本研究未获得任何地表常规自然科学基金支持. 算力由G.~美奈热心支持.
+}
+%==================== 正文开始 ====================
+\begin{document}
+\setlength\emergencystretch{1em}% 全局稍微放宽行宽，减小 Overfull \hbox
+% 使用双栏+通栏标题区域的排版方式
+\twocolumn[
+\maketitle
+\begin{abstract}
+本指南专为希望通过 \texttt{shittemplate} 文类撰写学术论文或学位论文的作者编写. 
+我们不仅会探讨如何配置环境与调用命令，更致力于解释排版背后的美学逻辑. 
+从题目构建, 作者身份声明到复杂的双栏布局，本指南将引导你如何将精力从琐碎的格式调整中解放出来，
+全身心地投入到学术创作本身. 
+通过阅读本文，你将能够独立产出一份符合 SHIT 规范, 视觉统一且极具专业感的学术文档. 
+\end{abstract}
+\begin{keywords}
+\LaTeX 模板; 学术写作; 排版策略; 自动化格式; SHIT 样式
+\end{keywords}
+\begin{impactstatement}
+统一的 LaTeX 模板可以极大降低论文排版成本，并保持期刊与学位论文外观风格一致. 
+本指南帮助作者在极短时间内掌握 \texttt{shittemplate} 的全部关键指令，
+从而专注于内容本身，而不是在版式细节上卷生卷死. 
+
+\vspace{2ex}
+
+\end{impactstatement}
+] % 这里结束 \twocolumn[...] 的通栏区域
+%==================== 正文章节 ====================
+\section{模板概览与编译环境}
+\noindent 在 \LaTeX 的世界里，样式 (Style)与内容 (Content)应当是分离的. 
+\texttt{shittemplate} 的核心使命就是承接所有的繁琐设置，它基于成熟的 \verb|ctexart| 宏包构建，
+深度定制了符合学术审美的页面边距, 行间距以及字体层次. 
+
+当你声明 \verb|\documentclass{shittemplate}| 时，你实际上是开启了一套预设好的 ``学术工厂" 
+它会自动为你处理好 A4 纸张的几何布局，并默认采用 ``标题通栏, 正文双栏" 的高级排版模式. 
+为了确保渲染效果的精确性，本模板强制要求使用 XeLaTeX 作为编译引擎，以便稳定调用本地的高级字体资源. 
+\subsection{类文件与基本思想}
+本模板的类文件名为 \verb|shittemplate.cls|，基于 \verb|ctexart|，
+针对中文环境进行了预配置，并额外定制了：
+\begin{itemize}
+  \item \textbf{统一的页面设置}：A4 纸, 上下左右边距固定; 
+  \item \textbf{中英文标题样式}：中文大标题采用方正宋体加粗，段前段后间距统一; 
+  \item \textbf{双栏正文}：默认使用两栏排版，标题区域通栏; 
+  \item \textbf{统一的页眉样式}：左侧为 SHIT 英文 word logo，右侧为图标 logo (可自定义); 
+  \item \textbf{专用环境}：摘要, 影响声明, 关键词, 致谢等
+\end{itemize}
+你在使用时，只需要在导言区声明：
+\begin{verbatim}
+\documentclass[a4paper,10pt]{shittemplate}
+\end{verbatim}
+即可自动继承上述设置，无需再次手动加载 \verb|ctex|, \verb|geometry|, 
+\verb|fancyhdr| 等宏包
+\subsection{编译引擎要求}
+类文件中强制检查编译引擎，使用 XeLaTeX：
+\begin{itemize}
+  \item \textbf{必须使用} \verb|xelatex| 编译;
+  \item 若使用 pdfLaTeX 或 LuaLaTeX，将直接报错
+\end{itemize}
+推荐的完整编译流程为 (含参考文献)：
+\begin{verbatim}
+xelatex  main.tex
+bibtex   main
+xelatex  main.tex
+xelatex  main.tex
+\end{verbatim}
+其中 \verb|main.tex| 为你的主文档文件名. 
+\subsection{字体与字体文件目录}
+一份高质量的论文，其质感往往源于字体的细节. 
+本模板对字体的选择近乎偏执：西文部分以经典, 易读的 Times New Roman 为正文基石，
+辅以 Arial 处理无衬线需求; 中文部分摒弃系统默认宋体，转而推荐使用方正系列的专业字库，
+让方正仿宋的儒雅, 方正黑体的厚重以及方正楷体的灵动共同构成论文清晰的层次感. 
+
+为了保证项目在不同机器上的一致性，强烈建议将这些字体统一放置在项目根目录下的
+\verb|fonts/| 文件夹中，通过 ``自带字体" 的方式显著提升文档的可移植性. 
+类文件假定所有所需字体存放在项目目录下的 \verb|fonts/| 子目录中. 
+涉及的字体文件包括但不限于：
+\begin{itemize}
+  \item \textbf{西文字体}
+    \begin{itemize}
+      \item Times New Roman: \verb|times.ttf|, \verb|timesbd.ttf|, 
+            \verb|timesi.ttf|, \verb|timesbi.ttf|;
+      \item Arial: \verb|arial.ttf|, \verb|arialbd.ttf|;
+      \item 数学字体 Cambria Math: \verb|cambria-math.ttf|
+    \end{itemize}
+  \item \textbf{中文字体}
+    \begin{itemize}
+      \item 正文字体：方正仿宋 \verb|FZFSK.TTF|;
+      \item 无衬线：方正黑体 \verb|FZHTK.TTF|;
+      \item 等宽/代码风格：方正楷体 \verb|FZKTK.TTF|;
+      \item 中文大标题宋体：\verb|FZSSK.TTF|
+    \end{itemize}
+\end{itemize}
+若你本地字体文件命名不同，可以选择：
+\begin{itemize}
+  \item 直接将对应 ttf/otf 文件复制并重命名为类文件所期望的名字; 
+  \item 或者自行修改 \verb|shittemplate.cls| 中的设置，\\
+        使之指向你现有的字体文件 (如 \verb|\setmainfont|, 
+        \verb|\setCJKmainfont| 等命令)
+\end{itemize}
+\section{文档结构与推荐目录组织}
+\subsection{主文档结构}
+标准用法是编写一个主文件 (例如 \verb|main.tex|)，结构大致如下：
+\begin{verbatim}
+\documentclass[a4paper,10pt]{shittemplate}
+\titlecn{中文题目}
+\titleen{English Title}
+\authorlist{作者 A \and 作者 B}
+\affiliation{某某大学 某某学院}
+\authorfootnote{%
+  详细作者与资助信息……
+}
+\begin{document}
+\twocolumn[
+\maketitle
+\input{frontmatter/abstract}
+]
+\input{chapters/01_introduction}
+\input{chapters/02_methodology}
+\input{chapters/03_conclusion}
+\input{frontmatter/acknowledgement}
+\bibliographystyle{gbt7714-bibtex-style/
+gbt7714-numerical}
+\bibliography{references}
+\end{document}
+\end{verbatim}
+其中：
+\begin{itemize}
+  \item \verb|\twocolumn[ ... ]| 内部放置标题与前言性内容 (摘要等); 
+  \item 正文章节通常拆分为 \verb|chapters/| 目录下的多个 \verb|.tex| 文件，
+        通过 \verb|\input| 引入; 
+  \item 致谢可以放在 \\ \texttt{frontmatter/acknowledgement.tex} 中，\\
+        通过 \verb|\input| 引入并使用\\
+        \verb|acknowledgment| 环境
+\end{itemize}
+\subsection{推荐的目录结构}
+典型项目结构示例：
+\begin{verbatim}
+project/
+  main.tex
+  shittemplate.cls
+  fonts/
+  figures/
+    logs/
+      word-logo.pdf
+      pic-logo.pdf
+  frontmatter/
+    abstract.tex
+    acknowledgement.tex
+  chapters/
+    01_introduction.tex
+    02_methodology.tex
+    03_conclusion.tex
+  references.bib
+  gbt7714-bibtex-style/
+\end{verbatim}
+只要包含类文件和字体目录，并按上述方式组织，就可以直接套用本指南
+和示例 \verb|main.tex|，把精力更多地放在内容和论证本身，而不是目录结构的细节上. 
+\section{标题与作者信息相关命令}
+在学术传播中，标题和作者信息是论文的 ``门面". 
+本模板通过一组语义化的自定义命令统一管理这些元数据，
+从题目构建, 作者矩阵到脚注中的资助与通讯信息，都可以一次性配置完成. 
+这些命令应在
+\verb|\begin{document}| 之前, 导言区中给出. 
+\subsection{\textbackslash titlecn：中文标题}
+\begin{verbatim}
+\titlecn{中文题目}
+\end{verbatim}
+\begin{itemize}
+  \item \textbf{功能}：设置首页大号中文标题; 
+\item \textbf{排版效果}：使用预设的宋体大字号，加粗并着 SHIT 紫色; 
+\item \textbf{注意}：必填，否则标题区域会为空. 
+\end{itemize}
+\subsection{\textbackslash titleen：英文标题 (可选)}
+\begin{verbatim}
+\titleen{English Title of the Paper}
+\end{verbatim}
+\begin{itemize}
+  \item \textbf{功能}：设置中文标题下方的英文标题; 
+  \item \textbf{可选性}：若不调用 \verb|\titleen| 或内容为空，
+        则英文标题区域会被自动略去; 
+  \item \textbf{换行}：可使用 \verb|\\| 手动换行，例如：
+\begin{verbatim}
+\titleen{Currency Inflation in\\
+the Underworld:\\
+How Much to Burn?}
+\end{verbatim}
+\end{itemize}
+\subsection{\textbackslash authorlist：作者列表}
+\begin{verbatim}
+\authorlist{柠檬猫 \and 柠檬鱼 \and\\
+G美奈 \and Miku 殿下}
+\end{verbatim}
+\begin{itemize}
+  \item \textbf{功能}：设置作者姓名列表; 
+  \item \textbf{分隔符}：使用 \verb|\and| 作为作者之间的分隔符; 
+  \item \textbf{上标关联}：可以在姓名后手动添加单位上标，
+        例如 \verb|柠檬猫$^{1}$|
+\end{itemize}
+\subsection{\textbackslash affiliation：作者单位}
+\begin{verbatim}
+\affiliation{Cariton Univ.}
+\end{verbatim}
+\begin{itemize}
+  \item \textbf{功能}：统一显示所有作者所属的单位信息; 
+  \item \textbf{格式}：可以手动添加学院, 系别信息
+        和英文翻译; 
+  \item \textbf{多单位}：若有多个单位，可自行通过换行
+         (\verb|\\|)或分号分隔
+\end{itemize}
+\subsection{\textbackslash authorfootnote：作者脚注与资助信息}
+\begin{verbatim}
+\authorfootnote{%
+  柠檬猫等人... University of Cariton.\\
+  通讯作者：... miku@example.com.\\
+  本工作得到 ... 编号 M78-007\\
+}
+\end{verbatim}
+\begin{itemize}
+  \item \textbf{功能}：在标题页底部以小号字体\\
+        集中给出作者信息, 通讯作者, 资助项目等; 
+  \item \textbf{使用方法}：
+    \begin{itemize}
+      \item 内部支持正常文本, 数学公式以及手动换行 \verb|\\|; 
+      \item 建议使用 \verb|$^{1}$| 之类上标与作者列表中的上标对应
+    \end{itemize}
+  \item \textbf{可选性}：若不调用，标题页下方将没有额外作者脚注块
+\end{itemize}
+\subsection{\textbackslash maketitle：生成标题页}
+完成以上信息设置后，在 \verb|\twocolumn[ ... ]| 内部调用：
+\begin{verbatim}
+\twocolumn[
+\maketitle
+% 可在此处继续放摘要等
+]
+\end{verbatim}
+\begin{itemize}
+  \item \textbf{功能}：按照模板定义的风格生成封面/标题区域; 
+  \item \textbf{注意}：\verb|\maketitle| 前后不要额外插入\\
+        \verb|\clearpage| 等命令
+\end{itemize}
+\section{摘要, 影响声明与关键词环境}
+在正文开启之前，摘要区域往往是读者的第一站. 
+模板对 \verb|abstract| 环境进行了重定义，会自动在内容前标注中英文双语题头，并统一缩进与段间距，
+让不同作者撰写的摘要在视觉上保持高度一致. 
+
+此外，为了响应现代学术规范对社会影响的关注，模板特意加入了 \verb|impactstatement| (影响声明)环境——
+它不仅是一个格式块，更是作者审视自身研究价值与潜在社会影响的专属空间. 
+最后，通过 \verb|keywords| 环境，你可以清晰地罗列索引词，确保你的研究在数据库检索中更易被精准发现. 
+\subsection{abstract：摘要环境}
+类文件对标准的 \verb|abstract| 环境做了重定义：
+\begin{verbatim}
+\begin{abstract}
+这里写中英文或中英混排摘要内容，
+长度不宜过长，注意控制在一段或数段内
+\end{abstract}
+\end{verbatim}
+\begin{itemize}
+  \item \textbf{显示标题}：自动在前面加粗\\
+        打印  ``ABSTRACT / 摘要" ; 
+  \item \textbf{位置}：通常放在 \verb|\maketitle| 之后, \\
+        \verb|\twocolumn[ ... ]| 内部; 
+\item \textbf{内容}：可包含中英文, 公式, 引用等. 
+\end{itemize}
+\subsection{impactstatement：影响声明环境}
+\begin{verbatim}
+\begin{impactstatement}
+这里简要说明论文工作对实践, 政策或后续研究的
+潜在影响例如对地府货币政策的启示. 
+\end{impactstatement}
+\end{verbatim}
+\begin{itemize}
+  \item \textbf{显示标题}：自动打印\\
+         ``IMPACT STATEMENT / 影响声明" ; 
+  \item \textbf{用途}：多数 journal 要求作者\\
+        说明实际影响; 
+\item \textbf{位置}：通常与摘要, 关键词一起\\
+        放在首页通栏区域. 
+\end{itemize}
+\subsection{keywords：关键词环境}
+\begin{verbatim}
+\begin{keywords}
+SHIT 期刊; 地府货币; 通货膨胀; 学位论文模板
+\end{keywords}
+\end{verbatim}
+\begin{itemize}
+  \item \textbf{显示标题}：自动打印\\
+         ``INDEX TERMS / 关键词" ; 
+  \item \textbf{分隔符}：建议用中文分号或英文逗号\\
+        分隔多个关键词
+\end{itemize}
+\section{正文章节与列表环境}
+正文部分, 承载的是论文完整的论证结构的样式文件. 
+\texttt{shittemplate.cls} 在保持对标准章节命令完全兼容的前提下，
+对编号样式与段间距做了精心定制：你只需按逻辑拆分章节，模板会自动将其排成经典的罗马数字标题风格. 
+在列表环境方面，类文件预设了适中的缩进与项间距，避免默认设置下过于松散或拥挤，
+使段落在双栏页面中更加紧凔, 易读. 
+\subsection{section 命令与章节编号风格}
+直接使用标准的 \verb|\section| 命令即可, 也可以尝试 \verb|\subsection| 和 \verb|\subsubsection|：
+\begin{verbatim}
+\section{引言}
+\section{研究方法}
+\section{实验结果}
+\end{verbatim}
+类文件自动将其格式化为罗马数字编号，例如：
+\begin{verbatim}
+I. 引言
+II. 研究方法
+\end{verbatim}
+你无需手动在标题前加  ``I." ,  ``II."  等
+\subsection{列表环境：itemize 与 enumerate}
+类文件通过 \verb|enumitem| 宏包预设了 \verb|itemize| 和 \verb|enumerate| 列表缩进与间距：
+\begin{itemize}
+  \item \textbf{无序列表}：
+\begin{verbatim}
+\begin{itemize}
+  \item 第一条
+  \item 第二条
+\end{itemize}
+\end{verbatim}
+  \item \textbf{有序列表}：
+\begin{verbatim}
+\begin{enumerate}
+  \item 第一点
+  \item 第二点
+\end{enumerate}
+\end{verbatim}
+\end{itemize}
+若需要更细的控制，可自行在文档中使用
+\verb|\setlist| (但一般不建议覆盖全局样式). 
+\section{页眉页脚与 Logo 配置}
+页眉是论文身份与品牌的视觉标识之一，它在读者翻页时悄无声息地提示期刊或机构的归属. 
+\texttt{shittemplate} 默认在页眉左侧检索并插入 SHIT 的 word logo，右侧预留给机构图形 logo; 
+当相应文件不存在时，则优雅退回到文字模式，从而在 ``有图" 和 ``无图" 场景下都保持版式的完整性与庄重感. 
+\subsection{默认页眉样式}
+该模板采用了 \verb|fancyhdr| 来配置页眉的样式, 页眉上方左右为 SHIT 的标志：
+\begin{itemize}
+  \item \textbf{左侧}：如果存在 \texttt{figures/logs/}\allowbreak\texttt{word-logo.pdf}，
+        则插入该 pdf 作为 SHIT word logo; 
+        否则退化为文字版  ``SHIT"  的全称 logo; 
+  \item \textbf{右侧}：如果存在 \texttt{figures/logs/}\allowbreak\texttt{pic-logo.pdf}，
+        则插入该 pdf 作为图形 logo; 
+  \item \textbf{页脚}：默认不显示页脚线
+\end{itemize}
+\subsection{更换或添加 Logo}
+在该项目中, 采用了矢量化方式以及PPT技术排版了高质量的 Logo 图样, 并保存在对应路径和文件名：
+\begin{verbatim}
+figures/logs/word-logo.pdf
+figures/logs/pic-logo.pdf
+\end{verbatim}
+\begin{itemize}
+\item 建议使用矢量 pdf，以保证缩放清晰; 
+\item 图片高度由类文件控制，通常无需在正文中额外设置. 
+\end{itemize}
+\section{参考文献与 Bib\TeX 使用}
+在学术写作中，参考文献既是对前人工作的致敬，也是论文可信度的重要支撑. 
+\texttt{shittemplate} 预设了对 \verb|natbib| 与 GB/T~7714 样式的支持：
+你只需维护好自己的 \verb|.bib| 数据库，并在文末调用 \verb|\bibliographystyle| 与 \verb|\bibliography|，
+即可获得符合国标要求, 版式统一的文后文献列表. 
+\subsection{参考文献标题与样式}
+为了更加统一化, 在类文件里将参考文献标题重命名为：
+\begin{verbatim}
+REFERENCE / 参考文献
+\end{verbatim}
+使用方式与普通 LaTeX 文档完全一致，典型写法为：
+\begin{verbatim}
+\bibliographystyle{gbt7714-bibtex-style/
+gbt7714-numerical}
+\bibliography{references}
+\end{verbatim}
+\begin{itemize}
+  \item \textbf{样式文件路径}：假定项目中存在\\
+        \texttt{gbt7714-}\allowbreak\texttt{bibtex-style/} 目录; 
+  \item \textbf{文献数据库}：\verb|references.bib|
+\end{itemize}
+\subsection{文内引用}
+由于类文件已加载 \verb|natbib|，你可以直接使用：
+\begin{itemize}
+  \item 数字型引用：\verb|\cite{key}|; 
+  \item 文中引用 (带作者)：\verb|\citet{key}|; 
+  \item 括号引用：\verb|\citep{key}|
+\end{itemize}
+例如，Miku 演唱的《世界第一公主殿下》可以作为一条文献条目 \cite{sekaiichihimedenka} 收录在参考文献中。
+编译顺序需包含 \verb|bibtex| 步骤，详见前文. 
+\section{致谢环境}
+与此同时, 在该项总分, 类文件提供了一个专门的致谢环境
+\verb|acknowledgment|：
+\begin{verbatim}
+\begin{acknowledgment}
+作者在此感谢 University of Cariton
+提供的精神支持与服务器电费
+\end{acknowledgment}
+\end{verbatim}
+\begin{itemize}
+  \item \textbf{显示标题}：自动生成无编号章节标题\\
+         ``ACKNOWLEDGMENT / 致谢" ; 
+\item \textbf{位置}：通常放在参考文献之前或之后，\\
+        视期刊要求而定. 
+\end{itemize}
+论文的结尾通常留给那些在背后默默支持你的人. 
+\verb|acknowledgment| 环境会自动生成一个无编号的醒目标题，
+让你可以在严谨的技术叙述之外，以更温柔的语气致谢导师, 同伴与资助者. 
+正如本份排版指南本身，它源于深夜的灵感，旨在为每一位跋涉在学术道路上的 ``石友" 提供一点微薄的技术支撑——
+愿排版不再成为负担，而只是知识呈现的一件体面外衣. 
+\section{常见问题与使用建议}
+\subsection{编译时报字体或编码错误}
+\begin{itemize}
+  \item 确认确实使用 \verb|xelatex| 编译; 
+  \item 检查 \texttt{fonts/} 目录下字体文件是否存在, \\
+        文件名是否匹配; 
+\item 若无法提供指定字体，可修改 \verb|shittemplate.cls|\\
+        中的 \verb|\setmainfont|, \verb|\setCJKmainfont| 等指令，\\
+        改为系统已有字体. 
+\end{itemize}
+\subsection{如何改为单栏排版？}
+\begin{itemize}
+\item 本类文件默认两栏排版，若你非常确定需要单栏，可在导言区
+        手动加入 \verb|\onecolumn| (不推荐)，或自行复制类文件进行深度修改; 
+\item 对于 journal/thesis 使用场景，建议保持默认双栏风格. 
+\end{itemize}
+\subsection{如何添加新的命令或环境？}
+\begin{itemize}
+\item 建议在主文档 (如 \verb|main.tex|)的导言区\\
+        使用 \verb|\newcommand| 或 \verb|\newenvironment| 自行扩展; 
+\item 不建议直接修改 \verb|shittemplate.cls|，除非你非常清楚更改的影响. 
+\end{itemize}
+%==================== 示例致谢 (可选) ====================
+\begin{acknowledgment}
+本说明文档由柠檬猫, 柠檬鱼, G美奈与 Miku 殿下联合撰写，
+特别感谢 University of Cariton (加里顿大学) 在研究经费与心灵慰藉方面
+提供的虚构支持，以及所有在使用 SHIT 模板路上一起踩坑的同学。
+由于晚上看 SHIT 期刊比较多，发现没有一个统一规范的模板，于是出了这个模板，为 SHIT 期刊构思添石。
+\end{acknowledgment}
+% 若本说明不需要真实参考文献，可注释掉以下两行
+\bibliographystyle{gbt7714-bibtex-style/gbt7714-numerical}
+\bibliography{references}
+\end{document}
